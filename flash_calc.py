@@ -2,9 +2,7 @@ import os
 import random
 import time
 
-wrong_count = 0
-correct_count = 0
-while input("続けますか?: はい(Y) いいえ(N)") != "N":
+def question():
     a = random.randint(1, 10)
     b = random.randint(1, 10)
     ans = a + b
@@ -12,15 +10,31 @@ while input("続けますか?: はい(Y) いいえ(N)") != "N":
     time.sleep(2)
     os.system('clear')
     user_input = int(input("答えを入力してください: "))
-
     if user_input == ans:
         print("正解です")
-        correct_count += 1
+        return True
     else:
         print("不正解です")
-        wrong_count += 1
+        return False
 
-print("{}問正解しました。".format(correct_count))
-print("{}問間違え増田。".format(wrong_count)
-      if wrong_count != 0
-      else "全問正解です。 パーフェクト！！！")
+def main():
+    correct_count = 0
+    wrong_count = 0
+
+    number_of_question = int(input("何問解きますか？: "))
+
+    for _ in range(number_of_question):
+        if question():
+            correct_count += 1
+        else:
+            wrong_count += 1
+
+    if correct_count == number_of_question:
+        print("全問正解！パーフェクトです")
+    elif correct_count != 0:
+        print("{}問中{}問正解です".format(number_of_question, correct_count))
+    else:
+        print("全問不正解！頑張って")
+
+if __name__ == "__main__":
+    main()
