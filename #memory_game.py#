@@ -47,8 +47,7 @@ class MemoryGame:
             lst[erase_at] = 0
             self.drawing_square(lst)
             time.sleep(2)
-            os.system('clear')
-        print(self.disapperarance_nums)
+            os.system('clear")
         if self.check_order_of_disapperrance():
             print("正解です")
         else:
