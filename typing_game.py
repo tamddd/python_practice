@@ -1,6 +1,6 @@
 from collections import deque
 import os
-#import readchar
+import readchar
 import time
 
 """
@@ -37,12 +37,12 @@ class TypingGame:
         for i in self.txt:
             if i == "":
                 continue
+            print(i)
             deq_txt = deque(i)
             while len(deq_txt) != 1:
                 now_char = deq_txt.popleft()
-                #while not is_correct_input(readchar.readkey(), now_char):
-                #    miss_count += 1
-                time.sleep(0.3)
+                while not self.is_correct_input(readchar.readkey(), now_char):
+                    miss_count += 1
                 os.system('clear')
                 print("".join(deq_txt))
         print("終了です")
