@@ -20,7 +20,7 @@ class MemoryGame:
             print(grid)
         
     def generate_numbers_lst(self):
-        lst = [i for i in range(10, 0, -1)]
+        lst = [i for i in range(9, -1, -1)]
         return lst
 
     def erase_at_random(self, lst):
