@@ -1,4 +1,6 @@
+from collections import deque
 import os
+#import readchar
 import time
 
 """
@@ -29,17 +31,24 @@ class TypingGame:
         return user_input == txt
     
     def game(self):
+        start = time.time()
+        miss_count = 0
         os.system('clear')
         for i in self.txt:
             if i == "":
                 continue
             deq_txt = deque(i)
-            while len(deq_txt) != 0:
-                now_char = deq.popleft()
-                while not is_correct_input(  ,now_char):
-                    
-                print(deq_txt)
-
+            while len(deq_txt) != 1:
+                now_char = deq_txt.popleft()
+                #while not is_correct_input(readchar.readkey(), now_char):
+                #    miss_count += 1
+                time.sleep(0.3)
+                os.system('clear')
+                print("".join(deq_txt))
+        print("終了です")
+        print("{}回ミスしました".format(miss_count)if miss_count != 0\
+              else "ノーミス、パーフェクトです")
+        print("タイムは{}秒です。".format(time.time() - start))
     def start(self):
         is_start = input("ゲームを始めますか？: はい（Y）いいえ（N) ")
         if is_start == "Y":
