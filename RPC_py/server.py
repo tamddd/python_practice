@@ -14,8 +14,12 @@ def floor(x):
 def nroot(n, x):
     return int(x ** (1/n))
 
+def add(a, b):
+    return a + b
+
 # メソッドと対応する関数を登録
 methods = {
+    'add' : add,
     'subtract': subtract,
     'floor': floor,
     'nroot': nroot,
@@ -36,24 +40,22 @@ with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as server_socket:
         method = request['method']
         params = request['params']
         param_types = request['param_types']
-
+        print(request)
         # パラメータの型が正しいことを検証
         if len(params) != len(param_types):
             response = {'error': 'Invalid request'}
         else:
-            for i in range(len(params)):
-                if not isinstance(params[i], param_types[i]):
-                    response = {'error': 'Invalid request'}
-                    break
-            else:
-                # 関数を実行し、結果を取得
+            # 関数を実行し、結果を取得
                 func = methods.get(method)
                 if func:
                     result = func(*params)
                     result_type = type(result).__name__
                     response = {'result': result, 'result_type': result_type}
+                    print(response)
                 else:
                     response = {'error': 'Method not found'}
+                    print(response)
+        print(response)
         # レスポンスを送信する
         client_socket.sendall(json.dumps(response).encode('utf-8'))
         # ソケットを閉じる
